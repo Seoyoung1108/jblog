@@ -22,8 +22,8 @@ private BlogRepository blogRepository;
 		return vo;
 	}
 
-	public List<CategoryVo> getCategoriesList() {
-		List<CategoryVo> list = blogRepository.findAll();
+	public List<CategoryVo> getCategoriesList(String id) {
+		List<CategoryVo> list = blogRepository.findAll(id);
 		return list;
 	}
 

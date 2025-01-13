@@ -33,7 +33,7 @@ public class UserRepository {
 	}
 
 	public int createBasicCategory(String blogId) {
-		return sqlSession.insert("category.insert", blogId);
+		return sqlSession.insert("category.insertBasic", blogId);
 		
 	}
 

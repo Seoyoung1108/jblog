@@ -25,13 +25,16 @@ public class BlogController {
 	@RequestMapping("")
 	public String main(@PathVariable("id") String id, Model model) {
 		BlogVo blogVo = blogService.getContents(id);
-		List<CategoryVo> categoryVoList = blogService.getCategoriesList();
+		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
 		List<PostVo> postVoList = blogService.getPostsList(categoryVoList.get(0).getId());
 		
 		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("categoryVoList", categoryVoList);
-		model.addAttribute("postVoList", postVoList);
-		model.addAttribute("targetPost", postVoList.get(0));
+		
+		if(postVoList.size()!=0) {
+			model.addAttribute("postVoList", postVoList);
+			model.addAttribute("targetPost", postVoList.get(0));
+		}	
 
 		return "blog/main";
 	}
@@ -39,7 +42,7 @@ public class BlogController {
 	@RequestMapping("/{categoryId}")
 	public String main(@PathVariable("id") String id, @PathVariable("categoryId") Long categoryId, Model model) {
 		BlogVo blogVo = blogService.getContents(id);
-		List<CategoryVo> categoryVoList = blogService.getCategoriesList();
+		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
 		List<PostVo> postVoList = blogService.getPostsList(categoryId);
 		
 		model.addAttribute("blogVo", blogVo);
@@ -53,7 +56,7 @@ public class BlogController {
 	@RequestMapping("/{categoryId}/{postId}")
 	public String main(@PathVariable("id") String id, @PathVariable("categoryId") Long categoryId, @PathVariable("postId") Long postId, Model model) {
 		BlogVo blogVo = blogService.getContents(id);
-		List<CategoryVo> categoryVoList = blogService.getCategoriesList();
+		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
 		List<PostVo> postVoList = blogService.getPostsList(categoryId);
 		PostVo postVo = blogService.getPost(categoryId, postId);
 		
@@ -77,7 +80,7 @@ public class BlogController {
 	public String adminCategory(@PathVariable("id") String id, Model model) {
 		BlogVo vo = blogService.getContents(id);
 		model.addAttribute("blogVo", vo);
-		List<CategoryVo> list = blogService.getCategoriesList();
+		List<CategoryVo> list = blogService.getCategoriesList(id);
 		model.addAttribute("list", list);
 
 		return "blog/admin-category";
@@ -105,7 +108,7 @@ public class BlogController {
 	@RequestMapping("/admin/write")
 	public String adminWrite(@PathVariable("id") String id, Model model) {
 		BlogVo blogVo = blogService.getContents(id);
-		List<CategoryVo> categoryVoList = blogService.getCategoriesList();
+		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
 		
 		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("categoryVoList", categoryVoList);

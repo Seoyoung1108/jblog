@@ -31,8 +31,8 @@ public class BlogRepository {
 		return sqlSession.insert("category.insert", vo);	
 	}
 
-	public List<CategoryVo> findAll() {
-		return sqlSession.selectList("category.findAll");
+	public List<CategoryVo> findAll(String id) {
+		return sqlSession.selectList("category.findAll", id);
 	}
 
 	public int deleteByIdAndCategoryId(String id, Long categoryId) {
