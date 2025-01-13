@@ -38,6 +38,17 @@
 	<!-- DefaultServlet Handler -->
 	<mvc:default-servlet-handler/>
 	
+	<!-- Interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/auth" />
+			<bean class="jblog.security.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/logout" />
+			<bean class="jblog.security.LogoutInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
     <!-- Locale Resolver -->
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
