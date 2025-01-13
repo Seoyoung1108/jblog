@@ -7,5 +7,9 @@
 			insert into blog values ("님의 블로그",#{picturePath},#{blogId});
 		]]>
 	</insert>
-	
+	<select id="findById" parameterType="string" resultType="blogvo">
+		<![CDATA[
+			select title, profile, blog_id as blogId from blog where blog_id=#{id}
+		]]>
+	</select>
 </mapper>
