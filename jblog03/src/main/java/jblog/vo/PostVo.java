@@ -2,6 +2,7 @@ package jblog.vo;
 
 public class PostVo {
 	private Long id;
+	private String title;
 	private String contents;
 	private String regDate;
 	private Long categoryId;
@@ -11,6 +12,12 @@ public class PostVo {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContents() {
 		return contents;
@@ -32,8 +39,9 @@ public class PostVo {
 	}
 	@Override
 	public String toString() {
-		return "PostVo [id=" + id + ", contents=" + contents + ", regDate=" + regDate + ", categoryId=" + categoryId
-				+ "]";
+		return "PostVo [id=" + id + ", title=" + title + ", contents=" + contents + ", regDate=" + regDate
+				+ ", categoryId=" + categoryId + "]";
 	}
+	
 	
 }
