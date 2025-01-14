@@ -1,6 +1,7 @@
 package jblog.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
@@ -36,73 +37,35 @@ public class BlogController {
 		this.servletContext = servletContext;
 	}
 	
-	/*
-	@RequestMapping({"","/{path1}","{path1},{path2}"})
-	public String main(@PathVariable("id") String id, @PathVariable("path1") Optional<Long> path1, @PathVariable("path2") Optional<Long> String path2) {
+	@RequestMapping({"","/{path1}","/{path1}/{path2}"})
+	public String main(@PathVariable("id") String id, @PathVariable("path1") Optional<Long> path1, @PathVariable("path2") Optional<Long> path2, Model model) {
 		Long categoryId = 0L;
 		Long postId = 0L;
+		
+		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
+		List<PostVo> postVoList = null;
+		PostVo postVo = null;
 		
 		if(path2.isPresent()){
 			categoryId = path1.get();
 			postId = path2.get();
-		} else i(path1.isPresent()){
+			
+			postVoList = blogService.getPostsList(categoryId);
+			postVo = blogService.getPost(categoryId, postId);
+		} else if(path1.isPresent()){
 			categoryId = path1.get();
-		}
-		
-		// 서비스에서 하기
-		// categoryId = 0L => 기본 카테고리 번호 세팅
-		// postId도
-
-		return "blog/main";
-	}
-	*/
-	
-	@RequestMapping("")
-	public String main(@PathVariable("id") String id, Model model, HttpServletRequest request) {
-		// 블로그 정보 저장
-		HttpSession session = request.getSession();
-		session.setAttribute("currentWatchingId", id);
-		
-		BlogVo blogVo = blogService.getContents(id);
-		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
-		List<PostVo> postVoList = blogService.getPostsList(categoryVoList.get(0).getId());
-		
-		model.addAttribute("blogVo", blogVo);
-		model.addAttribute("categoryVoList", categoryVoList);
-		
-		if(postVoList.size()!=0) {
-			model.addAttribute("postVoList", postVoList);
-			model.addAttribute("targetPost", postVoList.get(0));
+			
+			postVoList = blogService.getPostsList(categoryId);
+			if(postVoList.size()!=0) {
+				postVo = postVoList.get(0);
+			}
+		} else {
+			postVoList = blogService.getPostsList(categoryVoList.get(0).getId());
+			if(postVoList.size()!=0) {
+				postVo = postVoList.get(0);
+			}	
 		}	
-
-		return "blog/main";
-	}
-	
-	@RequestMapping("/{categoryId}")
-	public String main(@PathVariable("id") String id, @PathVariable("categoryId") Long categoryId, Model model) {
-		BlogVo blogVo = blogService.getContents(id);
-		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
-		List<PostVo> postVoList = blogService.getPostsList(categoryId);
 		
-		model.addAttribute("blogVo", blogVo);
-		model.addAttribute("categoryVoList", categoryVoList);
-		
-		if(postVoList.size()!=0) {
-			model.addAttribute("postVoList", postVoList);
-			model.addAttribute("targetPost", postVoList.get(0));
-		}	
-
-		return "blog/main";
-	}
-	
-	@RequestMapping("/{categoryId}/{postId}")
-	public String main(@PathVariable("id") String id, @PathVariable("categoryId") Long categoryId, @PathVariable("postId") Long postId, Model model) {
-		BlogVo blogVo = blogService.getContents(id);
-		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
-		List<PostVo> postVoList = blogService.getPostsList(categoryId);
-		PostVo postVo = blogService.getPost(categoryId, postId);
-		
-		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("categoryVoList", categoryVoList);
 		model.addAttribute("postVoList", postVoList);
 		model.addAttribute("targetPost", postVo);

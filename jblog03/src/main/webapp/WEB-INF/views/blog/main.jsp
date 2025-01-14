@@ -38,7 +38,7 @@
 				</div>
 				<ul class="blog-list">
 					<c:forEach items="${postVoList }" var="vo" varStatus="status">
-						<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/${vo.categoryId}/${vo.id}">${vo.title }</a> <span>${vo.regDate }</span>	</li>
+						<li><a href="${pageContext.request.contextPath}/${blog.blogId}/${vo.categoryId}/${vo.id}">${vo.title }</a> <span>${vo.regDate }</span>	</li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -46,7 +46,7 @@
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img src="${pageContext.request.contextPath}${blogVo.profile}">
+				<img src="${pageContext.request.contextPath}${blog.profile}">
 			</div>
 		</div>
 
@@ -54,7 +54,7 @@
 			<h2>카테고리</h2>
 			<ul>
 				<c:forEach items="${categoryVoList }" var="vo" varStatus="status">
-					<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/${vo.id}">${vo.name }</a></li>
+					<li><a href="${pageContext.request.contextPath}/${blog.blogId}/${vo.id}">${vo.name }</a></li>
 				</c:forEach>
 			</ul>
 		</div>
