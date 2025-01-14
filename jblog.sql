@@ -13,7 +13,10 @@ insert into user values (null, "일상", "기본 생성 카테고리", "ee");
 select * from category;
 insert into category values (null, "sdf", "FFf", "kkk");
 update blog set title = "님 블로그" where blog_id = "kkk";
+delete from user where name = 'd';
+delete from category where id = 13;
 
+select count(*) from post where category_id=1;
 
 select * from post;
 
