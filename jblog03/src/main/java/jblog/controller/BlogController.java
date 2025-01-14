@@ -19,7 +19,7 @@ import jblog.vo.PostVo;
 import jblog.service.FileuploadService;
 
 @Controller
-@RequestMapping("/{id}")
+@RequestMapping("/{id:(?!assets).*}")
 public class BlogController {
 	private final FileuploadService fileUploadService;
 	private final BlogService blogService;
@@ -32,6 +32,27 @@ public class BlogController {
 		this.servletContext = servletContext;
 		this.applicationContext = applicationContext;
 	}
+	
+	/*
+	@RequestMapping({"","/{path1}","{path1},{path2}"})
+	public String main(@PathVariable("id") String id, @PathVariable("path1") Optional<Long> path1, @PathVariable("path2") Optional<Long> String path2) {
+		Long categoryId = 0L;
+		Long postId = 0L;
+		
+		if(path2.isPresent()){
+			categoryId = path1.get();
+			postId = path2.get();
+		} else i(path1.isPresent()){
+			categoryId = path1.get();
+		}
+		
+		// 서비스에서 하기
+		// categoryId = 0L => 기본 카테고리 번호 세팅
+		// postId도
+
+		return "blog/main";
+	}
+	*/
 	
 	@RequestMapping("")
 	public String main(@PathVariable("id") String id, Model model) {
@@ -58,8 +79,11 @@ public class BlogController {
 		
 		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("categoryVoList", categoryVoList);
-		model.addAttribute("postVoList", postVoList);
-		model.addAttribute("targetPost", postVoList.get(0));
+		
+		if(postVoList.size()!=0) {
+			model.addAttribute("postVoList", postVoList);
+			model.addAttribute("targetPost", postVoList.get(0));
+		}	
 
 		return "blog/main";
 	}
@@ -79,7 +103,7 @@ public class BlogController {
 		return "blog/main";
 	}
 	
-	@RequestMapping({"/admin", "/admin/default"})
+	@RequestMapping("/admin")
 	public String admin(@PathVariable("id") String id, Model model) {
 		BlogVo vo = blogService.getContents(id);
 		model.addAttribute("blogVo", vo);

@@ -12,7 +12,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>${blog.title}</h1>
+			<c:import url="/WEB-INF/views/includes/header.jsp" />
 			<ul>
 				<c:choose>
 					<c:when test='${authUser==null }'>
@@ -58,12 +58,7 @@
 				</c:forEach>
 			</ul>
 		</div>
-		
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
 </body>
 </html>

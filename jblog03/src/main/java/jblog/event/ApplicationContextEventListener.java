@@ -23,6 +23,7 @@ public class ApplicationContextEventListener {
 		MutablePropertyValues propertyValues = new MutablePropertyValues();
 		propertyValues.add("title", vo.getTitle());
 		propertyValues.add("profile", vo.getProfile());
+		propertyValues.add("blogId", vo.getBlogId());
 		
 		GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
 		beanDefinition.setBeanClass(BlogVo.class);
