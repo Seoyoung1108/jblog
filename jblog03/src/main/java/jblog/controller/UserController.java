@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jakarta.validation.Valid;
 import jblog.vo.UserVo;
 import jblog.service.UserService;
 
@@ -32,14 +31,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(@ModelAttribute @Valid UserVo userVo, BindingResult result, Model model) {
+	public String join(UserVo userVo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			Map<String,Object> map = result.getModel();
 			model.addAllAttributes(map);
 			
 			return "user/join";
 		}
-		
+		System.out.println(userVo);
 		userService.join(userVo);
 		
 		return "redirect:/joinsuccess";

@@ -16,17 +16,17 @@
 		<ul class="menu">
 			<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
 		</ul>
-		<form:form modelAttribute="userVo" method="post" action="${pageContext.request.contextPath }/join">
+		<form class="join-form" method="post" action="${pageContext.request.contextPath }/join">
 			<label class="block-label" for="name">이름</label>
-			<form:input path="name" />
+			<input type="text" name="name">
 			
 			<label class="block-label" for="blog-id">아이디</label>
-			<form:input path="id" />
+			<input type="text" name="id">
 			<input id="btn-checkemail" type="button" value="id 중복체크">
 			<img id="img-checkemail" style="display: none;" src="${pageContext.request.contextPath}/assets/images/check.png">
 
 			<label class="block-label" for="password">패스워드</label>
-			<form:password path="password" />
+			<input type="password" name="password">
 
 			<fieldset>
 				<legend>약관동의</legend>
@@ -35,7 +35,7 @@
 			</fieldset>
 
 			<input type="submit" value="가입하기">
-		</form:form>
+		</form>
 	</div>
 </body>
 </html>
