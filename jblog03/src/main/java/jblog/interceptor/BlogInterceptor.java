@@ -1,6 +1,10 @@
 package jblog.interceptor;
 
+import java.util.Map;
+
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.HandlerMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,14 +24,13 @@ public class BlogInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// blog main 저장
-		HttpSession session = request.getSession();
-		UserVo userVo = (UserVo)session.getAttribute("authUser");
-		
-		BlogVo blogVo=(BlogVo)request.getServletContext().getAttribute("blog");
-		if(blogVo==null) {
-			blogVo=blogService.getContents(userVo.getId());
-			request.getServletContext().setAttribute("blog",blogVo);
-		}
+		String id = request.getParameter("id");
+        
+		Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+		System.out.println(pathVariables);
+   
+		BlogVo blogVo=blogService.getContents(pathVariables.get("id"));
+		request.getServletContext().setAttribute("blog",blogVo);
 		
 		return true;
 	}

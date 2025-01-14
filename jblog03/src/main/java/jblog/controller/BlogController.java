@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jblog.service.BlogService;
 import jblog.vo.BlogVo;
 import jblog.vo.CategoryVo;
@@ -55,7 +57,11 @@ public class BlogController {
 	*/
 	
 	@RequestMapping("")
-	public String main(@PathVariable("id") String id, Model model) {
+	public String main(@PathVariable("id") String id, Model model, HttpServletRequest request) {
+		// 블로그 정보 저장
+		HttpSession session = request.getSession();
+		session.setAttribute("currentWatchingId", id);
+		
 		BlogVo blogVo = blogService.getContents(id);
 		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
 		List<PostVo> postVoList = blogService.getPostsList(categoryVoList.get(0).getId());
