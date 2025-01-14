@@ -18,9 +18,9 @@
 					<c:when test='${authUser==null }'>
 						<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
 					</c:when>
-					<c:when test='${authUser.id==blogVo.blogId }'>
+					<c:when test='${authUser.id==blog.blogId }'>
 						<li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
-						<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}">메인</a></li>
+						<li><a href="${pageContext.request.contextPath}/${blog.blogId}">메인</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
@@ -32,22 +32,22 @@
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
 					<li class="selected">기본설정</li>
-					<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/admin/category">카테고리</a></li>
-					<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/admin/write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${blog.blogId}/admin/category">카테고리</a></li>
+					<li><a href="${pageContext.request.contextPath}/${blog.blogId}/admin/write">글작성</a></li>
 				</ul>
-				<form action="${pageContext.request.contextPath }/${blogVo.blogId}/admin/default/update" method="post" enctype="multipart/form-data">
+				<form action="${pageContext.request.contextPath }/${blog.blogId}/admin/default/update" method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
-			      			<td><input type="text" size="40" name="title" value="${blogVo.title }"></td>
+			      			<td><input type="text" size="40" name="title" value="${blog.title }"></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
-			      			<td><img src="${pageContext.request.contextPath}${blogVo.profile }"></td>      			
+			      			<td><img src="${pageContext.request.contextPath}${blog.profile }"></td>      			
 			      		</tr>      		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
-			      			<td><input type="hidden" name="profile" value="${blogVo.profile }"></td>
+			      			<td><input type="hidden" name="profile" value="${blog.profile }"></td>
 			      			<td><input type="file" name="file"></td>      			
 			      		</tr>           		
 			      		<tr>

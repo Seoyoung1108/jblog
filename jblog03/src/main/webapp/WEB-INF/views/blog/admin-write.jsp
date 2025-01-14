@@ -18,9 +18,9 @@
 					<c:when test='${authUser==null }'>
 						<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
 					</c:when>
-					<c:when test='${authUser.id==blogVo.blogId }'>
+					<c:when test='${authUser.id==blog.blogId }'>
 						<li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
-						<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}">메인</a></li>
+						<li><a href="${pageContext.request.contextPath}/${blog.blogId}">메인</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
@@ -31,11 +31,11 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/admin">기본설정</a></li>
-					<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/admin/category">카테고리</a></li>
+					<li><a href="${pageContext.request.contextPath}/${blog.blogId}/admin">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath}/${blog.blogId}/admin/category">카테고리</a></li>
 					<li class="selected">글작성</li>
 				</ul>
-				<form action="${pageContext.request.contextPath }/${blogVo.blogId}/admin/write/add" method="post">
+				<form action="${pageContext.request.contextPath }/${blog.blogId}/admin/write/add" method="post">
 			      	<table class="admin-cat-write">
 			      		<tr>
 			      			<td class="t">제목</td>
