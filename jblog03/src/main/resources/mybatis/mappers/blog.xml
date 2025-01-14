@@ -12,4 +12,18 @@
 			select title, profile, blog_id as blogId from blog where blog_id=#{id}
 		]]>
 	</select>
+	<update id="update" parameterType="blogvo">
+		<choose>
+			<when test="profile == null">
+				<![CDATA[
+				update blog set title = #{title }  where blog_id = #{blogId }
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				update blog set title = #{title }, profile = #{profile } where blog_id = #{blogId }
+				]]>
+			</otherwise>
+		</choose>
+	</update>
 </mapper>

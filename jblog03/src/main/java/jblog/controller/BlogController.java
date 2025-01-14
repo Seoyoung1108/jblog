@@ -2,24 +2,35 @@ package jblog.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.ServletContext;
 import jblog.service.BlogService;
 import jblog.vo.BlogVo;
 import jblog.vo.CategoryVo;
 import jblog.vo.PostVo;
+import jblog.service.FileuploadService;
 
 @Controller
 @RequestMapping("/{id}")
 public class BlogController {
-	private BlogService blogService;
+	private final FileuploadService fileUploadService;
+	private final BlogService blogService;
+	private final ServletContext servletContext;
+	private final ApplicationContext applicationContext;
 	
-	public BlogController(BlogService blogService) {
+	public BlogController(BlogService blogService, FileuploadService fileUploadService, ServletContext servletContext, ApplicationContext applicationContext) {
 		this.blogService=blogService;
+		this.fileUploadService=fileUploadService;
+		this.servletContext = servletContext;
+		this.applicationContext = applicationContext;
 	}
 	
 	@RequestMapping("")
@@ -74,6 +85,32 @@ public class BlogController {
 		model.addAttribute("blogVo", vo);
 
 		return "blog/admin-default";
+	}
+	
+	@RequestMapping("/admin/default/update")
+	public String updateBlog(@PathVariable("id") String id, @RequestParam("title") String title, @RequestParam("file") MultipartFile multipartFile) {
+		String profile = fileUploadService.restore(multipartFile);
+		BlogVo blogVo = new BlogVo();
+		
+		blogVo.setTitle(title);
+		blogVo.setBlogId(id);
+		
+		if(profile != null) {
+			blogVo.setProfile(profile);
+		}
+		
+		System.out.println(blogVo);
+		
+		blogService.updateBlog(blogVo);
+		
+		// update servlet context bean
+		servletContext.setAttribute("blogVo", blogVo);
+		
+		// update application context bean
+		BlogVo blog = applicationContext.getBean(BlogVo.class);
+		BeanUtils.copyProperties(blogVo, blog);
+		
+		return "redirect:/{id}/admin";
 	}
 	
 	@RequestMapping("/admin/category")

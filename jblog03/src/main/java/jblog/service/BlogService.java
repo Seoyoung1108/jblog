@@ -48,4 +48,8 @@ private BlogRepository blogRepository;
 		PostVo vo = blogRepository.findByCategoryIdAndPostId(categoryId, postId);
 		return vo;
 	}
+
+	public void updateBlog(BlogVo blogVo) {
+		blogRepository.updateBlog(blogVo);	
+	}
 }

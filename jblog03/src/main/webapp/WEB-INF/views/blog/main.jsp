@@ -12,15 +12,15 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>${blogVo.blogId}${blogVo.title}</h1>
+			<h1>${blog.title}</h1>
 			<ul>
 				<c:choose>
 					<c:when test='${authUser==null }'>
 						<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
 					</c:when>
-					<c:when test='${authUser.id==blogVo.blogId }'>
+					<c:when test='${authUser.id==blog.blogId }'>
 						<li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
-						<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/admin">블로그 관리</a></li>
+						<li><a href="${pageContext.request.contextPath}/${blog.blogId}/admin">블로그 관리</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>

@@ -33,7 +33,7 @@
 	</mvc:annotation-driven>
 	
 	<!-- mvc url-resource mapping -->
-	<!-- <mvc:resources mapping="/assets/upload-images/**" location="file:/mysite-uploads/" /> -->
+	<mvc:resources mapping="/assets/upload-images/**" location="file:/mysite-uploads/" />
 
 	<!-- DefaultServlet Handler -->
 	<mvc:default-servlet-handler/>
@@ -56,6 +56,10 @@
     	<property name="cookieHttpOnly" value="false" />
 	</bean>
 	
+	<!-- Multipart Resolver -->
+	<!-- Vo 객체로 받을 수 있음. -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+	
 	<!-- View Resolver -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	   <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
@@ -64,10 +68,13 @@
 	   <property name="exposeContextBeansAsAttributes" value="true" />
 	   <property name="exposedContextBeanNames">
 	   		<list>
-	   			<value>site</value>
+	   			<value>blog</value>
 	   		</list>
 	   </property>
 	</bean>
+	
+	<!-- ApplicationContextEventListener -->
+	<bean class="jblog.event.ApplicationContextEventListener" />
 	
 	<context:annotation-config />
 	<context:component-scan base-package="jblog.controller" />

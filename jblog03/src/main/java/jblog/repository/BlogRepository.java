@@ -50,4 +50,8 @@ public class BlogRepository {
 	public PostVo findByCategoryIdAndPostId(Long categoryId, Long postId) {
 		return sqlSession.selectOne("post.findByCategoryIdAndPostId", Map.of("categoryId",categoryId,"postId",postId));
 	}
+
+	public int updateBlog(BlogVo blogVo) {
+		return sqlSession.update("blog.update", blogVo);
+	}
 }
