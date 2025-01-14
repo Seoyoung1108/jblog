@@ -5,6 +5,7 @@ public class CategoryVo {
 	private String name;
 	private String description;
 	private String blogId;
+	private int postNum;
 	
 	public Long getId() {
 		return id;
@@ -30,8 +31,15 @@ public class CategoryVo {
 	public void setBlogId(String blogId) {
 		this.blogId = blogId;
 	}
+	public int getPostNum() {
+		return postNum;
+	}
+	public void setPostNum(int postNum) {
+		this.postNum = postNum;
+	}
 	@Override
 	public String toString() {
-		return "CategoryVo [id=" + id + ", name=" + name + ", description=" + description + ", blogId=" + blogId + "]";
+		return "CategoryVo [id=" + id + ", name=" + name + ", description=" + description + ", blogId=" + blogId
+				+ ", postNum=" + postNum + "]";
 	}
 }

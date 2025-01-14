@@ -54,4 +54,8 @@ public class BlogRepository {
 	public int updateBlog(BlogVo blogVo) {
 		return sqlSession.update("blog.update", blogVo);
 	}
+
+	public int deleteByCategoryId(Long categoryId) {
+		return sqlSession.delete("post.deleteByCategoryId", categoryId);
+	}
 }

@@ -31,7 +31,7 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/admin/default">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/admin">기본설정</a></li>
 					<li class="selected">카테고리</li>
 					<li><a href="${pageContext.request.contextPath}/${blogVo.blogId}/admin/write">글작성</a></li>
 				</ul>
@@ -48,7 +48,7 @@
 						<tr>
 							<td>${count-status.index }</td>
 							<td>${vo.name }</td>
-							<td>10</td>
+							<td>${vo.postNum }</td>
 							<td>${vo.description }</td>
 							<td><a href="${pageContext.request.contextPath }/${blogVo.blogId}/admin/category/delete/${vo.id }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a></td>
 						</tr>		

@@ -123,16 +123,10 @@ public class BlogController {
 			blogVo.setProfile(profile);
 		}
 		
-		System.out.println(blogVo);
-		
 		blogService.updateBlog(blogVo);
 		
 		// update servlet context bean
-		servletContext.setAttribute("blogVo", blogVo);
-		
-		// update application context bean
-		BlogVo blog = applicationContext.getBean(BlogVo.class);
-		BeanUtils.copyProperties(blogVo, blog);
+		servletContext.setAttribute("blog", blogVo);
 		
 		return "redirect:/{id}/admin";
 	}
@@ -142,6 +136,11 @@ public class BlogController {
 		BlogVo vo = blogService.getContents(id);
 		model.addAttribute("blogVo", vo);
 		List<CategoryVo> list = blogService.getCategoriesList(id);
+		
+		for(CategoryVo cVo: list) {
+			cVo.setPostNum(blogService.getPostsList(cVo.getId()).size());
+		}
+		
 		model.addAttribute("list", list);
 
 		return "blog/admin-category";
@@ -161,6 +160,7 @@ public class BlogController {
 	
 	@RequestMapping("/admin/category/delete/{categoryId}")
 	public String deleteCategory(@PathVariable("id") String id, @PathVariable("categoryId") Long categoryId) {
+		blogService.deletePosts(categoryId);
 		blogService.deleteCategory(id, categoryId);
 
 		return "redirect:/{id}/admin/category";

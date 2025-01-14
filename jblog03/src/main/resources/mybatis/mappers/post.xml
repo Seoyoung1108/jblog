@@ -17,4 +17,9 @@
 			select id, title, contents, date_format(reg_date, '%Y/%m/%d') as regDate, category_id as categoryId from post where category_id = #{categoryId} and id = #{postId} order by id desc
 		]]>
 	</select>
+	<delete id="deleteByCategoryId" parameterType="long">
+		<![CDATA[
+			delete from post where category_id=#{categoryId}
+		]]>
+	</delete>
 </mapper>

@@ -52,4 +52,8 @@ private BlogRepository blogRepository;
 	public void updateBlog(BlogVo blogVo) {
 		blogRepository.updateBlog(blogVo);	
 	}
+	
+	public void deletePosts(Long categoryId) {
+		blogRepository.deleteByCategoryId(categoryId);
+	}
 }
