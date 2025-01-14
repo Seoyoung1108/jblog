@@ -4,7 +4,7 @@
 <mapper namespace="blog">
 	<insert id="insert" parameterType="map">
 		<![CDATA[
-			insert into blog values ("님의 블로그",#{picturePath},#{blogId});
+			insert into blog values ("기본 제목",#{picturePath},#{blogId});
 		]]>
 	</insert>
 	<select id="findById" parameterType="string" resultType="blogvo">

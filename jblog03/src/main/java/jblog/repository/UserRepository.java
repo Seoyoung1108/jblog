@@ -29,7 +29,7 @@ public class UserRepository {
 	}
 
 	public int createBlog(String blogId) {
-		return sqlSession.insert("blog.insert", Map.of("picturePath","/assets/upload-images/default.jpeg","blogId",blogId));	
+		return sqlSession.insert("blog.insert", Map.of("picturePath","/assets/images/logo.jpg","blogId",blogId));	
 	}
 
 	public int createBasicCategory(String blogId) {
