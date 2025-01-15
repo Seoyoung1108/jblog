@@ -39,13 +39,36 @@ private BlogRepository blogRepository;
 		blogRepository.insertPost(vo);	
 	}
 
-	public List<PostVo> getPostsList(Long categoryId) {
-		List<PostVo> list = blogRepository.findAllPosts(categoryId);
+	public List<PostVo> getPostsList(String id, Long categoryId) {
+		List<PostVo> list = null;
+		
+		if(categoryId==0L) {
+			list = blogRepository.findAllPosts(blogRepository.findAll(id).get(0).getId());
+		} else {
+			list = blogRepository.findAllPosts(categoryId);
+		}
+		
 		return list;
 	}
 
-	public PostVo getPost(Long categoryId, Long postId) {
-		PostVo vo = blogRepository.findByCategoryIdAndPostId(categoryId, postId);
+	public PostVo getPost(String id, Long categoryId, Long postId) {
+		List<PostVo> list = null;
+		PostVo vo = null;
+		
+		if(categoryId==0L && postId==0L) {
+			list = blogRepository.findAllPosts(blogRepository.findAll(id).get(0).getId());
+			if(list.size()!=0) {
+				vo = list.get(0);
+			}	
+		} else if(postId==0L) {
+			list = blogRepository.findAllPosts(categoryId);
+			if(list.size()!=0) {
+				vo = list.get(0);
+			}			
+		} else {
+			vo = blogRepository.findByCategoryIdAndPostId(categoryId, postId);
+		}
+		
 		return vo;
 	}
 

@@ -42,29 +42,16 @@ public class BlogController {
 		Long categoryId = 0L;
 		Long postId = 0L;
 		
-		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
-		List<PostVo> postVoList = null;
-		PostVo postVo = null;
-		
-		if(path2.isPresent()){
+		if(path2.isPresent()) {
 			categoryId = path1.get();
 			postId = path2.get();
-			
-			postVoList = blogService.getPostsList(categoryId);
-			postVo = blogService.getPost(categoryId, postId);
-		} else if(path1.isPresent()){
+		} else if(path1.isPresent()) {
 			categoryId = path1.get();
-			
-			postVoList = blogService.getPostsList(categoryId);
-			if(postVoList.size()!=0) {
-				postVo = postVoList.get(0);
-			}
-		} else {
-			postVoList = blogService.getPostsList(categoryVoList.get(0).getId());
-			if(postVoList.size()!=0) {
-				postVo = postVoList.get(0);
-			}	
-		}	
+		}
+		
+		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
+		List<PostVo> postVoList = blogService.getPostsList(id, categoryId);
+		PostVo postVo = blogService.getPost(id, categoryId, postId);
 		
 		model.addAttribute("categoryVoList", categoryVoList);
 		model.addAttribute("postVoList", postVoList);
@@ -106,7 +93,7 @@ public class BlogController {
 		List<CategoryVo> list = blogService.getCategoriesList(authUser.getId());
 		
 		for(CategoryVo cVo: list) {
-			cVo.setPostNum(blogService.getPostsList(cVo.getId()).size());
+			cVo.setPostNum(blogService.getPostsList(authUser.getId(), cVo.getId()).size());
 		}
 		
 		model.addAttribute("list", list);
