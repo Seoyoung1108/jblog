@@ -16,24 +16,6 @@
 	
 	<!-- Validator, ConversionService, MessageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven>
-		<!-- Message Converter -->
-		<mvc:message-converters>
-			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-				<property name="supportedMediaTypes">
-        			<list>
-             			<value>text/html; charset=UTF-8</value>
-        			</list>
-    			</property>
-			</bean>
-			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-			   <property name="supportedMediaTypes">
-			       <list>
-			            <value>application/json; charset=UTF-8</value>
-			        </list>
-			   </property>
-			</bean>
-		</mvc:message-converters>
-		
 		<!-- Argument Resolvers -->
 		<mvc:argument-resolvers>
 			<bean class="jblog.security.AuthUserHandlerMethodArgumentResolver" />
@@ -55,8 +37,8 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/user/auth" />
-			<mvc:exclude-mapping path="/user/logout" />
+			<mvc:exclude-mapping path="/auth" />
+			<mvc:exclude-mapping path="/logout" />
 			<mvc:exclude-mapping path="/assets/**" />
 			<bean class="jblog.security.AuthInterceptor" />
 		</mvc:interceptor>
@@ -71,12 +53,6 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
-    <!-- Locale Resolver -->
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-    	<constructor-arg index="0" value="lang" />
-    	<property name="cookieHttpOnly" value="false" />
-	</bean>
-	
 	<!-- Multipart Resolver -->
 	<!-- Vo 객체로 받을 수 있음. -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />

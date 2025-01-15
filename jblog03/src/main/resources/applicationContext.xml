@@ -45,7 +45,7 @@
 
 	<context:annotation-config />
 	<context:component-scan
-		base-package="jblog.service, jblog.repository, jblog.aspect">
+		base-package="jblog.service, jblog.repository">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"
