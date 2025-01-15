@@ -22,11 +22,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import jblog.interceptor.BlogInterceptor;
+
 
 @Configuration
 @EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
-	/*
 	// View Resolver
 	@Bean
 	public ViewResolver viewResolver() {
@@ -39,7 +40,6 @@ public class MvcConfig implements WebMvcConfigurer {
 		
 		return viewResolver;
 	}
-	*/
 	
 	// DefaultServlet Handler
 	@Override
@@ -47,20 +47,22 @@ public class MvcConfig implements WebMvcConfigurer {
 		configurer.enable();
 	}
 
-	/*
 	// Interceptors
 	@Bean
-	public HandlerInterceptor siteInterceptor() {
-		return new SiteInterceptor();
+	public HandlerInterceptor blogInterceptor() {
+		return new BlogInterceptor();
 	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry
-			.addInterceptor(siteInterceptor())
+			.addInterceptor(blogInterceptor())
 			.addPathPatterns("/**")
+			.excludePathPatterns("/")
+			.excludePathPatterns("/login")
+			.excludePathPatterns("/join")
+			.excludePathPatterns("/joinsuccess")
 			.excludePathPatterns("/assets/**");
 	}
-	*/
-	
+
 }

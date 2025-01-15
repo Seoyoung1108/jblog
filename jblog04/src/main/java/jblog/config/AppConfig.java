@@ -12,6 +12,8 @@ import jblog.config.app.MyBatisConfig;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
+@Import({DBConfig.class, MyBatisConfig.class})
+@ComponentScan(basePackages= {"jblog.service", "jblog.repository"})
 public class AppConfig {
 
 }

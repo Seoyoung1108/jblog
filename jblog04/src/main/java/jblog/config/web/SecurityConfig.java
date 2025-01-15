@@ -29,7 +29,6 @@ public class SecurityConfig implements WebMvcConfigurer {
 		resolvers.add(handlerMethodArgumentResolver());
 	}
 	
-	/*
 	// Interceptors
 	@Bean
 	public LoginInterceptor loginInterceptor() {
@@ -61,5 +60,4 @@ public class SecurityConfig implements WebMvcConfigurer {
 			.addPathPatterns("/**")
 			.excludePathPatterns("/auth", "/logout", "/assets/**");
 	}
-	*/
 }

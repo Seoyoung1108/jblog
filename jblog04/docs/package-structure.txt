@@ -1,0 +1,32 @@
+[src/main/java]
+	com x
+	 |--- poscodx x
+	 |	|--- jblog	
+	 |	|	|--- config
+	 |	|	|	|--- AppConfig.java
+	 |	|	|	|--- WebConfig.java
+	 |	|	|	|--- app
+	 |	|	|	|	|--- DBConfig.java
+	 |	|	|	|	|--- MyBatisConfig.java
+	 |	|	|	|--- web
+	 |	|	|	|	|--- MvcConfig.java
+	 |	|	|	|	|--- SecurityConfig.java
+	 |	|	|	|	|--- FileuploadConfig.java
+	 |	|	|--- controller
+	 |	|	|--- service
+	 |	|	|--- repository
+
+[src/main/resources]
+	com x 
+	 |--- poscodx x
+	 |	|--- jblog
+	 |	|	|--- config
+	 |      |	|	|--- app
+	 |      |	|	|	|--- jdbc.properties
+	 |      |	|	|	|--- mybatis
+	 |      |	|	|		|--- configuration.xml
+	 |      |	|	|		|--- mappers
+	 |      |	|	|		|	|--- board.xml
+	 |      |	|	|		|	|--- user.xml
+	 |      |	|	|--- web
+	 |      |	|	|	|--- fileupload.properties
