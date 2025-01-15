@@ -8,13 +8,14 @@ delete from user;
 select * from user;
 insert into blog values ("님의 블로그","사진주소","아이디");
 select * from blog;
-delete from user where id="aa";
+delete from user where name="d";
 insert into user values (null, "일상", "기본 생성 카테고리", "ee");
 select * from category;
 insert into category values (null, "sdf", "FFf", "kkk");
 update blog set title = "님 블로그" where blog_id = "kkk";
 delete from user where name = 'd';
-delete from category where id = 13;
+delete from blog where title="님의 블로그";
+update blog set title = "dd블로그" where blog_id="dd";
 
 select count(*) from post where category_id=1;
 
