@@ -38,7 +38,7 @@ a:hover 		{ color:#dc143c; text-decoration:none; font-weight:bold; }
 .join-form	 .block-label 						{ display:block }
 .join-form	 label, .userVo fieldset			{ margin:10px 0 5px 0 }
 
-.userVo	 input[type="submit"]					{ display:block; width:80px; margin:20px auto }
+.join-form	 input[type="submit"]					{ display:block; width:80px; margin:20px auto }
 
 .welcome-message								{ height: 200px }
 .welcome-message span							{ font-size:1.2em; font-wight:bold; color:#777 }
