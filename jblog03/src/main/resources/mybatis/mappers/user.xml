@@ -12,37 +12,9 @@
 			select id, name from user where id=#{id} and password=#{password}
 		]]>
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	<update id="update" parameterType="uservo">
-		<choose>
-			<when test='password==""'>
-				<![CDATA[
-					update user set name=#{name}, gender=#{gender} where id=#{id}
-				]]>
-			</when>
-			<otherwise>
-				<![CDATA[
-					update user set name=#{name}, password=#{password}, gender=#{gender} where id=#{id}
-				]]>
-			</otherwise>
-		</choose>
-	</update>
-	<select id="findById" parameterType="long" resultType="uservo">
+	<select id="findById" parameterType="string" resultType="uservo">
 		<![CDATA[
-			select name, email, gender from user where id=#{id}
-		]]>
-	</select>
-	
-	<select id="findByEmail" parameterType="string" resultType="uservo">
-		<![CDATA[
-			select id, name from user where email=#{email}
+			select id, name from user where id=#{id}
 		]]>
 	</select>
 </mapper>
