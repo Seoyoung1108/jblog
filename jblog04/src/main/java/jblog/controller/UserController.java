@@ -41,4 +41,12 @@ public class UserController {
 	public String joinSuccess() {
 		return "user/joinsuccess";
 	}
+	
+	@RequestMapping("/auth")
+	public void auth() {
+	}
+
+	@RequestMapping("/logout")
+	public void logout() {
+	}
 }

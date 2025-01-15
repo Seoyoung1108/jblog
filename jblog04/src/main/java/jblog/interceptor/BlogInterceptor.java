@@ -2,6 +2,7 @@ package jblog.interceptor;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.HandlerMapping;
 
@@ -11,11 +12,8 @@ import jblog.service.BlogService;
 import jblog.vo.BlogVo;
 
 public class BlogInterceptor implements HandlerInterceptor {
+	@Autowired
 	private BlogService blogService;
-	
-	public BlogInterceptor(BlogService blogService) {
-		this.blogService=blogService;
-	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

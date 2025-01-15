@@ -1,5 +1,6 @@
 package jblog.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,12 +10,9 @@ import jblog.service.UserService;
 import jblog.vo.UserVo;
 
 public class LoginInterceptor implements HandlerInterceptor {
+	@Autowired
 	private UserService userService;
 
-	public LoginInterceptor(UserService userService) {
-		this.userService=userService;
-	}
-	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

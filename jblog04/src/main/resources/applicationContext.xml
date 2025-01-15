@@ -12,9 +12,6 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
-
-	<!-- AOP Auto Proxy -->
-	<aop:aspectj-autoproxy />
 	
 	<!-- DataSource(Connection Pool) -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -24,18 +21,10 @@
 		<property name="password" value="jblog" />
 	</bean>
 	
-	<!-- Transaction AOP Proxy -->
-	<tx:annotation-driven />
-		
-	<!-- Transaction Manager -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<constructor-arg index="0" ref="dataSource" />
-	</bean>
-
 	<!-- MyBatis SqlSessionFactoryBean --> 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
 		<property name="dataSource" ref="dataSource" /> 
-		<property name="configLocation" value="classpath:mybatis/configuration.xml" /> 
+		<property name="configLocation" value="classpath:jblog/config/app/mybatis/configuration.xml" /> 
 	</bean>
 
 	<!-- MyBatis SqlSessionTemplate --> 
@@ -45,7 +34,7 @@
 
 	<context:annotation-config />
 	<context:component-scan
-		base-package="jblog.service, jblog.repository, jblog.aspect">
+		base-package="jblog.service, jblog.repository">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"
