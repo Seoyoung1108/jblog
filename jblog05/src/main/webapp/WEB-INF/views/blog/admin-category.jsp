@@ -42,9 +42,9 @@
 		      			<th>포스트 수</th>
 		      			<th>설명</th>
 		      			<th>삭제</th>      			
-		      		</tr>
+		      		</tr>	      		
 		      		<c:set var="count" value="${fn:length(list) }" />
-					<c:forEach items="${list }" var="vo" varStatus="status">
+					<c:forEach items="${list.subList(0,list.size()-1) }" var="vo" varStatus="status">
 						<tr>
 							<td>${count-status.index }</td>
 							<td>${vo.name }</td>
@@ -52,7 +52,14 @@
 							<td>${vo.description }</td>
 							<td><a href="${pageContext.request.contextPath }/${blog.blogId}/admin/category/delete/${vo.id }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a></td>
 						</tr>		
-					</c:forEach>	  
+					</c:forEach>
+					<tr>
+						<td>1</td>
+						<td>${list.get(list.size()-1).name }</td>
+						<td>${list.get(list.size()-1).postNum }</td>
+						<td>${list.get(list.size()-1).description }</td>
+						<td></td>
+					</tr>	  
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
