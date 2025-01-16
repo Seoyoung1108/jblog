@@ -5,6 +5,9 @@ desc user;
 
 insert into user values ("아이디","이름","비밀번호");
 delete from user;
+delete from blog;
+delete from category;
+delete from post;
 select * from user;
 insert into blog values ("님의 블로그","사진주소","아이디");
 select * from blog;

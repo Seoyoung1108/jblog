@@ -39,6 +39,7 @@ $(function(){
 				
 				$("#btn-check").hide();
 				$("#img-check").show();
+				$("#isDuplicate").val("no");
 				// 쓰는 란 막기
 			},
 			error: function(xhr,status,err){
@@ -66,6 +67,7 @@ $(function(){
 			<label class="block-label" for="blog-id">아이디</label>
 			<input id="id" type="text" name="id">
 			<input id="btn-check" type="button" value="id 중복체크">
+			<input type="hidden" id="isDuplicate" name="isDuplicate" value="yes"> 
 			<img id="img-check" style="display: none;" src="${pageContext.request.contextPath}/assets/images/check.png">
 
 			<label class="block-label" for="password">패스워드</label>
