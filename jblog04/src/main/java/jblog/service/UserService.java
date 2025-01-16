@@ -23,4 +23,9 @@ public class UserService {
 		UserVo vo = userRepository.findByIdAndPassword(id,password);
 		return vo;
 	}
+	
+	public UserVo getUser(String id) {
+		UserVo vo = userRepository.findById(id);
+		return vo;
+	}
 }

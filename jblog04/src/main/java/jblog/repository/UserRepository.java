@@ -37,4 +37,8 @@ public class UserRepository {
 		
 	}
 
+	public UserVo findById(String id) {
+		return sqlSession.selectOne("user.findById", id);
+	}
+
 }
