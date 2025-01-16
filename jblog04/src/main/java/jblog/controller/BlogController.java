@@ -40,7 +40,7 @@ public class BlogController {
 		this.servletContext = servletContext;
 	}
 	
-	@RequestMapping({"","/{path1}","/{path1}/{path2}"})
+	@RequestMapping({"","/","/{path1}","/{path1}/{path2}"})
 	public String main(@PathVariable("id") String id, @PathVariable("path1") Optional<Long> path1, @PathVariable("path2") Optional<Long> path2, Model model) {
 		// 존재하지 않는 블로그 처리
 		if(userService.getUser(id)==null) {

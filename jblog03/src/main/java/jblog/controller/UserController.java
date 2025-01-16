@@ -26,12 +26,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
-	public String join(@ModelAttribute UserVo userVo) {
+	public String join() {
 		return "user/join";
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(UserVo userVo, BindingResult result, Model model) {
+	public String join(UserVo userVo) {
+		if("".equals(userVo.getId())||"".equals(userVo.getName())||"".equals(userVo.getPassword())) {
+			return "redirect:/join";
+		}
 		userService.join(userVo);
 		
 		return "redirect:/joinsuccess";
