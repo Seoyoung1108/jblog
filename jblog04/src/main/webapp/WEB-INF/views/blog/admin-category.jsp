@@ -42,7 +42,7 @@
 		      			<th>포스트 수</th>
 		      			<th>설명</th>
 		      			<th>삭제</th>      			
-		      		</tr>	      		
+		      		</tr>    		
 		      		<c:set var="count" value="${fn:length(list) }" />
 					<c:forEach items="${list.subList(0,list.size()-1) }" var="vo" varStatus="status">
 						<tr>
@@ -50,7 +50,11 @@
 							<td>${vo.name }</td>
 							<td>${vo.postNum }</td>
 							<td>${vo.description }</td>
-							<td><a href="${pageContext.request.contextPath }/${blog.blogId}/admin/category/delete/${vo.id }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a></td>
+							<td>
+								<c:if test='${vo.postNum==0 }'>
+									<a href="${pageContext.request.contextPath }/${blog.blogId}/admin/category/delete/${vo.id }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
+								</c:if>
+							</td>
 						</tr>		
 					</c:forEach>
 					<tr>

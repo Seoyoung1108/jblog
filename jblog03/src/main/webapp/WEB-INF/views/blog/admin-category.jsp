@@ -50,7 +50,11 @@
 							<td>${vo.name }</td>
 							<td>${vo.postNum }</td>
 							<td>${vo.description }</td>
-							<td><a href="${pageContext.request.contextPath }/${blog.blogId}/admin/category/delete/${vo.id }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a></td>
+							<td>
+								<c:if test='${vo.postNum==0 }'>
+									<a href="${pageContext.request.contextPath }/${blog.blogId}/admin/category/delete/${vo.id }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
+								</c:if>
+							</td>
 						</tr>		
 					</c:forEach>
 					<tr>
