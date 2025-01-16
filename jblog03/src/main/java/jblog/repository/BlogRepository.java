@@ -58,4 +58,8 @@ public class BlogRepository {
 	public int deleteByCategoryId(Long categoryId) {
 		return sqlSession.delete("post.deleteByCategoryId", categoryId);
 	}
+
+	public CategoryVo findByCategoryIdAndCategoryId(Long categoryId) {
+		return sqlSession.selectOne("category.findByCategoryIdAndPostId", categoryId);
+	}
 }

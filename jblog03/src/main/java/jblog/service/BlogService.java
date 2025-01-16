@@ -50,6 +50,18 @@ private BlogRepository blogRepository;
 		
 		return list;
 	}
+	
+	public CategoryVo getCategory(String id, Long categoryId) {
+		CategoryVo vo = null;
+		
+		if(categoryId==0L) {
+			vo = new CategoryVo();
+		} else {
+			vo = blogRepository.findByCategoryIdAndCategoryId(categoryId);
+		}
+		
+		return vo;
+	}
 
 	public PostVo getPost(String id, Long categoryId, Long postId) {
 		List<PostVo> list = null;
@@ -62,6 +74,7 @@ private BlogRepository blogRepository;
 			}	
 		} else if(postId==0L) {
 			list = blogRepository.findAllPosts(categoryId);
+			vo = new PostVo();
 			if(list.size()!=0) {
 				vo = list.get(0);
 			}			
