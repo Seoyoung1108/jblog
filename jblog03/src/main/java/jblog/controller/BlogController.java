@@ -82,7 +82,12 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping("/admin")
-	public String admin(@AuthUser UserVo authUser, Model model) {
+	public String admin(@AuthUser UserVo authUser, @PathVariable("id") String id, Model model) {
+		// 다른 유저 접근 제한
+		if(!authUser.getId().equals(id)) {
+			return "redirect:/{id}";
+		}
+		
 		return "blog/admin-default";
 	}
 	
@@ -109,7 +114,12 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping("/admin/category")
-	public String adminCategory(@AuthUser UserVo authUser, Model model) {
+	public String adminCategory(@AuthUser UserVo authUser, @PathVariable("id") String id, Model model) {
+		// 다른 유저 접근 제한
+		if(!authUser.getId().equals(id)) {
+			return "redirect:/{id}";
+		}
+		
 		List<CategoryVo> list = blogService.getCategoriesList(authUser.getId());
 		
 		for(CategoryVo cVo: list) {
@@ -145,7 +155,12 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping("/admin/write")
-	public String adminWrite(@AuthUser UserVo authUser, Model model) {
+	public String adminWrite(@AuthUser UserVo authUser, @PathVariable("id") String id, Model model) {
+		// 다른 유저 접근 제한
+		if(!authUser.getId().equals(id)) {
+			return "redirect:/{id}";
+		}
+		
 		List<CategoryVo> categoryVoList = blogService.getCategoriesList(authUser.getId());
 		
 		model.addAttribute("categoryVoList", categoryVoList);
