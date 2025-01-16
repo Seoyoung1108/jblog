@@ -71,5 +71,5 @@
 	</bean>
 	
 	<context:annotation-config />
-	<context:component-scan base-package="jblog.controller" />
+	<context:component-scan base-package="jblog.controller, jblog.exception" />
 </beans>
