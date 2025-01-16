@@ -16,17 +16,17 @@ private BlogRepository blogRepository;
 	public BlogService(BlogRepository blogRepository) {
 		this.blogRepository=blogRepository;
 	}
-	
+
 	public BlogVo getContents(String id) {
 		BlogVo vo = blogRepository.findById(id);
 		return vo;
 	}
-	
+
 	public List<CategoryVo> getCategoriesList(String id) {
 		List<CategoryVo> list = blogRepository.findAll(id);
 		return list;
 	}
-	
+
 	public void deleteCategory(String id, Long categoryId) {
 		blogRepository.deleteByIdAndCategoryId(id, categoryId);	
 	}
@@ -34,11 +34,11 @@ private BlogRepository blogRepository;
 	public void addCategory(CategoryVo vo) {
 		blogRepository.insert(vo);
 	}
-	
+
 	public void addWrite(PostVo vo) {
 		blogRepository.insertPost(vo);	
 	}
-	
+
 	public List<PostVo> getPostsList(String id, Long categoryId) {
 		List<PostVo> list = null;
 		
@@ -51,6 +51,18 @@ private BlogRepository blogRepository;
 		return list;
 	}
 	
+	public CategoryVo getCategory(String id, Long categoryId) {
+		CategoryVo vo = null;
+		
+		if(categoryId==0L) {
+			vo = new CategoryVo();
+		} else {
+			vo = blogRepository.findByCategoryIdAndCategoryId(categoryId);
+		}
+		
+		return vo;
+	}
+
 	public PostVo getPost(String id, Long categoryId, Long postId) {
 		List<PostVo> list = null;
 		PostVo vo = null;
@@ -62,6 +74,7 @@ private BlogRepository blogRepository;
 			}	
 		} else if(postId==0L) {
 			list = blogRepository.findAllPosts(categoryId);
+			vo = new PostVo();
 			if(list.size()!=0) {
 				vo = list.get(0);
 			}			
@@ -71,7 +84,7 @@ private BlogRepository blogRepository;
 		
 		return vo;
 	}
-	
+
 	public void updateBlog(BlogVo blogVo) {
 		blogRepository.updateBlog(blogVo);	
 	}

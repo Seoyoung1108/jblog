@@ -23,36 +23,56 @@ import jblog.vo.UserVo;
 import jblog.security.Auth;
 import jblog.security.AuthUser;
 import jblog.service.FileuploadService;
+import jblog.service.UserService;
 
 @Controller
 @RequestMapping("/{id:(?!assets).*}")
 public class BlogController {
+	private final UserService userService;
 	private final FileuploadService fileUploadService;
 	private final BlogService blogService;
 	private final ServletContext servletContext;
 	
-	public BlogController(BlogService blogService, FileuploadService fileUploadService, ServletContext servletContext) {
+	public BlogController(BlogService blogService, FileuploadService fileUploadService, UserService userService, ServletContext servletContext) {
 		this.blogService=blogService;
 		this.fileUploadService=fileUploadService;
+		this.userService=userService;
 		this.servletContext = servletContext;
 	}
 	
 	@RequestMapping({"","/{path1}","/{path1}/{path2}"})
 	public String main(@PathVariable("id") String id, @PathVariable("path1") Optional<Long> path1, @PathVariable("path2") Optional<Long> path2, Model model) {
+		// 존재하지 않는 블로그 처리
+		if(userService.getUser(id)==null) {
+			return "redirect:/";
+		}
+		
 		Long categoryId = 0L;
 		Long postId = 0L;
 		
 		if(path2.isPresent()) {
 			categoryId = path1.get();
 			postId = path2.get();
+			
+			// 존재하지 않는 카테고리 & 글 처리
+			if(blogService.getCategory(id, categoryId)==null) {
+				return "redirect:/{id}";
+			} else if(blogService.getPost(id, categoryId, postId)==null) {
+				return "redirect:/{id}";
+			}
 		} else if(path1.isPresent()) {
 			categoryId = path1.get();
+			
+			// 존재하지 않는 카테고리 처리
+			if(blogService.getCategory(id, categoryId)==null) {
+				return "redirect:/{id}";
+			}
 		}
 		
 		List<CategoryVo> categoryVoList = blogService.getCategoriesList(id);
 		List<PostVo> postVoList = blogService.getPostsList(id, categoryId);
 		PostVo postVo = blogService.getPost(id, categoryId, postId);
-		
+	
 		model.addAttribute("categoryVoList", categoryVoList);
 		model.addAttribute("postVoList", postVoList);
 		model.addAttribute("targetPost", postVo);
@@ -62,7 +82,12 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping("/admin")
-	public String admin(@AuthUser UserVo authUser, Model model) {
+	public String admin(@AuthUser UserVo authUser, @PathVariable("id") String id, Model model) {
+		// 다른 유저 접근 제한
+		if(!authUser.getId().equals(id)) {
+			return "redirect:/{id}";
+		}
+		
 		return "blog/admin-default";
 	}
 	
@@ -89,7 +114,12 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping("/admin/category")
-	public String adminCategory(@AuthUser UserVo authUser, Model model) {
+	public String adminCategory(@AuthUser UserVo authUser, @PathVariable("id") String id, Model model) {
+		// 다른 유저 접근 제한
+		if(!authUser.getId().equals(id)) {
+			return "redirect:/{id}";
+		}
+		
 		List<CategoryVo> list = blogService.getCategoriesList(authUser.getId());
 		
 		for(CategoryVo cVo: list) {
@@ -125,7 +155,12 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping("/admin/write")
-	public String adminWrite(@AuthUser UserVo authUser, Model model) {
+	public String adminWrite(@AuthUser UserVo authUser, @PathVariable("id") String id, Model model) {
+		// 다른 유저 접근 제한
+		if(!authUser.getId().equals(id)) {
+			return "redirect:/{id}";
+		}
+		
 		List<CategoryVo> categoryVoList = blogService.getCategoriesList(authUser.getId());
 		
 		model.addAttribute("categoryVoList", categoryVoList);

@@ -17,6 +17,11 @@
 			select id, name, description, blog_id as blogId from category where blog_id=#{id} order by id desc
 		]]>
 	</select>
+	<select id="findByCategoryIdAndPostId" parameterType="long" resultType="categoryvo">
+		<![CDATA[
+			select id, name, description, blog_id as blogId from category where id=#{categoryId}
+		]]>
+	</select>
 	<delete id="deleteByIdAndCategoryId" parameterType="map">
 		<![CDATA[
 			delete from category where id=#{categoryId} and blog_id=#{id}
