@@ -1,4 +1,4 @@
-package jblog.config.web;
+package jblog.config.app;
 
 import java.util.List;
 

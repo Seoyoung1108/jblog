@@ -13,7 +13,8 @@
   	<maven.compiler.target>21</maven.compiler.target>
   	<org.springframework-version>6.2.1</org.springframework-version>
   	<logback.version>1.2.11</logback.version>
-  	<jcloverslf4j.version>1.7.36</jcloverslf4j.version>		
+  	<jcloverslf4j.version>1.7.36</jcloverslf4j.version>
+  	<org.springsecurity-web.version>6.4.2</org.springsecurity-web.version>	
   </properties>
   <dependencies>
   		<!-- Spring MVC -->
@@ -123,6 +124,24 @@
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.18.1</version>
 		</dependency>
+		<!-- spring security web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${org.springsecurity-web.version}</version>
+        </dependency>
+        <!-- spring security config -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${org.springsecurity-web.version}</version>
+        </dependency>
+        <!-- spring security taglibs -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${org.springsecurity-web.version}</version>
+        </dependency>
   </dependencies>
   <build>
   	<finalName>jblog05</finalName>
